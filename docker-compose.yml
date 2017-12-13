@@ -1,0 +1,7 @@
+porch:
+  container_name: porch
+  build: .
+  volumes:
+    - "./:/home/porch/"
+  ports:
+    - "5000:5000"
