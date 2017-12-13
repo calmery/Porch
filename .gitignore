@@ -215,4 +215,4 @@ typings/
 .env
 
 
-public/
+dist/
