@@ -2,6 +2,9 @@
 <html>
   <head>
     <title>Socket.IO chat</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.js"   integrity="sha256-5i/mQ300M779N2OVDrl16lbohwXNUdzL/R2aVUXyXWA="   crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://cdn.peerjs.com/0.3/peer.min.js"></script>
+    <script type="text/javascript" src="/client"></script>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px Helvetica, Arial; }
@@ -14,24 +17,126 @@
     </style>
   </head>
   <body>
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.js"   integrity="sha256-5i/mQ300M779N2OVDrl16lbohwXNUdzL/R2aVUXyXWA="   crossorigin="anonymous"></script>
-    <script>
+    <!-- <script>
         const socket = io();
         $('form').submit(() => {
-            socket.emit('chat message', $('#m').val());
-            $('#m').val('');
+            socket.emit('chat message', $('#message').val());
+            $('#message').val('');
             return false;
         });
         socket.on('chat message', (msg) => {
-            $('#messages').append($('<li>').text(msg));
+            $('#messages2').append($('<li>').text(msg));
         });
     </script>
 
+    <script>
+      let conn;     // データ通信用connectionオブジェクトの保存用変数
+
+      // SkyWayのシグナリングサーバーへ接続する  (APIキーを置き換える必要あり）
+      let peer = new Peer({ key: 'viswrd6u6hg58kt9', debug: 3});
+
+      // シグナリングサーバへの接続が確立したときに、このopenイベントが呼ばれる
+      peer.on('open', function(){
+          // 自分のIDを表示する
+          // - 自分のIDはpeerオブジェクトのidプロパティに存在する
+          // - 相手はこのIDを指定することで、通信を開始することが出来る
+          $('#my-id').text(peer.id);
+      });
+
+      // 相手からデータ通信の接続要求イベントが来た場合、このconnectionイベントが呼ばれる
+      // - 渡されるconnectionオブジェクトを操作することで、データ通信が可能
+      peer.on('connection', function(connection){
+        　
+          // データ通信用に connectionオブジェクトを保存しておく
+          conn = connection;
+
+          // 接続が完了した場合のイベントの設定
+          conn.on("open", function() {
+              // 相手のIDを表示する
+              // - 相手のIDはconnectionオブジェクトのidプロパティに存在する
+              $("#peer-id").text(conn.id);
+          });
+
+          // メッセージ受信イベントの設定
+          conn.on("data", onRecvMessage);
+      });
+
+      // メッセージ受信イベントの設定
+      function onRecvMessage(data) {
+          // 画面に受信したメッセージを表示
+          $("#messages").append($("<p>").text(conn.id + ": " + data).css("font-weight", "bold"));
+      }
+
+      // DOM要素の構築が終わった場合に呼ばれるイベント
+      // - DOM要素に結びつく設定はこの中で行なう
+      $(function() {
+
+          // Connectボタンクリック時の動作
+          $("#connect").click(function() {
+              // 接続先のIDをフォームから取得する
+              var peer_id = $('#peer-id-input').val();
+
+              // 相手への接続を開始する
+              conn = peer.connect(peer_id);
+
+              // 接続が完了した場合のイベントの設定
+              conn.on("open", function() {
+                  // 相手のIDを表示する
+                  // - 相手のIDはconnectionオブジェクトのidプロパティに存在する
+                  $("#peer-id").text(conn.id);
+              });
+
+              // メッセージ受信イベントの設定
+              conn.on("data", onRecvMessage);
+          });
+
+          // Sendボタンクリック時の動作
+          $("#send").click(function() {
+              // 送信テキストの取得
+              let message = $("#message").val();
+
+              // 送信
+              conn.send(message);
+
+              // 自分の画面に表示
+              $("#messages").append($("<p>").html(peer.id + ": " + message));
+
+              // 送信テキストボックスをクリア
+              $("#message").val("");
+          });
+
+          // Closeボタンクリック時の動作
+          $("#close").click(function() {
+              conn.close();
+          });
+      });
+    </script> -->
+    <!-- <ul id="message"></ul> -->
+    <form action="">
+      <input id="m" autocomplete="off" /><button >Send</button>
+    </form>
+
+
+    <h1>Chat</h1>
+    <div>
+        <input type="text" placeholder="PeerID" id="peer-id-input">
+        <button id="connect">Connect</button>
+        <button id="close">Close</button>
+    </div>
+    <div>
+        <p>MyID: <span id="my-id">-</span></p>
+        <p>PeerID: <span id="peer-id">-</span></p>
+    </div>
+    <hr>
+    <div>
+        <input type="text" placeholder="Chat Message" id="message">
+        <button id="send">Send</button>
+    </div>
+    <div id="messages"></div>
+
+
+
   </body>
+      <script src="/socket.io/socket.io.js"></script>
 </html>
