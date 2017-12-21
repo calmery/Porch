@@ -1,3 +1,5 @@
+const connected = {}
+
 const peer = new Peer( {
   key: 'viswrd6u6hg58kt9'
 } )
@@ -8,30 +10,36 @@ peer.on( 'open', () => {
 
 // Helper Functions
 
+const connect = peerId => {
+  const connection = peer.connect( peerId )
+
+  connection.on( 'open', () => {
+    console.log( 'Connected :', peer.id, '->', connection.peer )
+    connected[connection.peer] = connection
+  } )
+}
+
 const showMessage = ( peerId, message ) => {
   document.getElementById( 'messages' ).innerHTML += peerId + ': ' + message + '<br>'
 }
 
 // Main
 
-let connected
-
 peer.on( 'connection', connection => {
-  console.log( 'Connected:', connection.id )
+  console.log( 'Connected :', connection.peer, '->', peer.id )
 
-  connection.on( 'data', message => showMessage( connection.id, message ) )
+  if( connected[connection.peer] === undefined ){
+    connect( connection.peer )
+  }
+
+  connection.on( 'data', message => showMessage( connection.peer, message ) )
 } )
 
 // Connect Button
 
 document.getElementById( 'connect' ).addEventListener( 'click', () => {
   const remoteId = document.getElementById( 'peer-id-input' ).value
-
-  connected = peer.connect( remoteId )
-
-  connected.on( 'open', () => {
-    console.log( 'Connected:', connected.id )
-  } )
+  connect( remoteId )
 }, false )
 
 // Send Button
@@ -39,7 +47,7 @@ document.getElementById( 'connect' ).addEventListener( 'click', () => {
 document.getElementById( 'send' ).addEventListener( 'click', () => {
   const message = document.getElementById( 'message' ).value
 
-  connected.send( message )
+  Object.values( connected ).forEach( connection => connection.send( message ) )
 
   showMessage( peer.id, message )
 }, false )
@@ -47,5 +55,5 @@ document.getElementById( 'send' ).addEventListener( 'click', () => {
 // Close Button
 
 document.getElementById( 'close' ).addEventListener( 'click', () => {
-  connected.close()
+  Object.values( connected ).forEach( connection => connection.close() )
 } )
