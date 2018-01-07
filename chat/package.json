@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node app"
+    "start": "node server"
   },
   "dependencies": {
     "express": "^4.16.2",
