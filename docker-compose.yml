@@ -1,16 +1,15 @@
-version: '2'
+version: '3'
 
 services:
-  porch:
+  io:
     build: .
-    volumes:
-      - ./:/home/node
+    env_file: .env
     ports:
       - '3000:3000'
     links:
-      - mongo
-  # mongodb://mongo:27017
-  mongo:
-    image: mongo
+      - redis
+  redis:
+    image: redis:4
     ports:
-      - '27017:27017'
+      - '6379'
+    command: redis-server --appendonly yes

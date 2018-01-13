@@ -1,14 +1,15 @@
-FROM node:9.2.1
-MAINTAINER Marei Kikukawa <contact@calmery.me>
+FROM node:9.4.0
 
-ENV http_proxy http://wwwproxy.cc.sojo-u.ac.jp:3128
-ENV https_proxy $http_proxy
-ENV ftp_proxy $http_proxy
+COPY package.json /home/node
+COPY package-lock.json /home/node
 
-RUN apt-get update &&\
-		apt-get upgrade --yes
+WORKDIR /home/node
 
-USER node
+RUN rm -rf node_modules &&\
+    npm i --production
+
+COPY src /home/node/src
+
 EXPOSE 3000
 
-ENTRYPOINT ["/usr/bin/tail", "-f", "/dev/null"]
+CMD [ "node", "src/index" ]
