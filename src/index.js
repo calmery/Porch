@@ -2,7 +2,9 @@ const path = require( 'path')
 const express = require( 'express' )
 const redis = require( 'redis' )
 const redisStore = require( 'connect-redis' )( require( 'express-session' ) )
-const client = redis.createClient( 6379, 'redis' )
+const client = redis.createClient( 6379, 'redis', {
+  password: 'porch'
+} )
 const session = require( 'express-session' )( {
   secret: 'secret_key',
   resave: false,
@@ -70,7 +72,9 @@ const server = app.listen( process.env.PORT || 3000 )
 const user = process.env.PORCH_MAIL_USER
 const password = process.env.PORCH_MAIL_PASSWORD
 
-passwordless.init( new passwordlessRedisstore( 6379, 'redis' ) )
+passwordless.init( new passwordlessRedisstore( 6379, 'redis', {
+  password: 'porch'
+} ) )
 
 const smtpServer = email.server.connect( {
   user: user,
