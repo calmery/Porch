@@ -12,4 +12,4 @@ COPY src /home/node/src
 
 EXPOSE 3000
 
-CMD [ "node", "src/index" ]
+CMD npm start
