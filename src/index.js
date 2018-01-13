@@ -10,8 +10,6 @@ const session = require( 'express-session' )( {
   resave: false,
   saveUninitialized: false,
   store: new redisStore( {
-    host: 'redis',
-    port: 6379,
     client: client,
     ttl: 260
   } ),
