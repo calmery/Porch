@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node src/app"
+    "start": "node src/index"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
