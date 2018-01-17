@@ -57,6 +57,10 @@ nav#nav div#menu div.menu {
 }
 
 nav#nav div#menu div.menu:hover {
+  background: #3471D9;
+  -webkit-transition: 0.5s ease;
+}
+nav#nav div#menu div.menu.selected {
   background: #3471D9
 }
 nav#nav div#menu div.menu-official div.menu-official-icon {
@@ -109,6 +113,12 @@ section#main header#header {
   position: fixed;
 }
 
+section#main header#header div#header-front {
+  width: calc( 100% - 50px );
+  position: absolute;
+  z-index: 9999;
+}
+
 section#main header#header div#search {
   width: 198px;
   height: 24px;
@@ -119,17 +129,16 @@ section#main header#header div#search {
   font-size: 15px;
   font-weight: bold;
   float: left;
-  z-index: 9999;
-  position: absolute;
 }
 section#main header#header div#search textarea#search-input {
   padding: 0;
   margin: 0;
   width: 183px;
   height: 15px;
+  padding-top: 2px;
   border: 0;
   text-align: right;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: bold;
   resize: none;
   font-family: 'Helvetica Neue', sans-serif;
