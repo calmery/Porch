@@ -54,10 +54,6 @@ app.get( '/conversation', passwordless.restricted( { failureRedirect: '/login' }
   response.sendFile( path.resolve( __dirname, 'public/conversation.html' ) )
 )
 
-app.get( '/invite', passwordless.restricted( { failureRedirect: '/login' } ), ( request, response ) =>
-  response.sendFile( path.resolve( __dirname, 'public/invite.html' ) )
-)
-
 app.get( '/members', passwordless.restricted( { failureRedirect: '/login' } ), ( request, response ) =>
   response.sendFile( path.resolve( __dirname, 'public/members.html' ) )
 )
