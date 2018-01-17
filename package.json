@@ -13,7 +13,6 @@
     "passwordless": "^1.1.2",
     "passwordless-redisstore": "^1.0.2",
     "redis": "^2.8.0",
-    "socket.io": "^2.0.4",
-    "uuid": "^3.1.0"
+    "socket.io": "^2.0.4"
   }
 }
