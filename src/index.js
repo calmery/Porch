@@ -35,6 +35,8 @@ app.use( session )
 app.use( passwordless.sessionSupport() )
 app.use( passwordless.acceptToken( { successRedirect: '/' } ) )
 
+app.use( express.static( path.resolve( __dirname, 'public' ) ) )
+
 app.get( '/', ( request, response ) => {
   response.send( 'User ' + request.user )
 } )

@@ -1,0 +1,334 @@
+.clearfix {
+  min-height: 1px
+}
+.clearfix:after {
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+  content: '.'
+}
+
+@font-face {
+  src: url( 'font/CONDENSEicon.otf' );
+  font-family: Condense;
+}
+
+body {
+  background: #FAFAFA;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+  color: #646464
+}
+
+nav#nav {
+  width: 200px;
+  height: 100%;
+  background: #4885ED;
+  top: 0;
+  left: 0;
+  position: fixed;
+  color: #fff;
+}
+
+nav#nav div#room {
+  padding: 0 25px;
+  width: 150px;
+  margin-top: 30px;
+}
+nav#nav div#room div#room-name {
+  float: left
+}
+nav#nav div#room div#room-menu-toggle {
+  float: right;
+  font-family: Condense
+}
+
+nav#nav div#menu {
+  top: 75px;
+  left: 0;
+  position: absolute;
+}
+
+nav#nav div#menu div.menu {
+  width: 150px;
+  padding: 11px 25px;
+}
+
+nav#nav div#menu div.menu:hover {
+  background: #3471D9
+}
+nav#nav div#menu div.menu-official div.menu-official-icon {
+  float: left;
+  margin-right: 10px;
+  font-family: Condense;
+  font-weight: normal;
+}
+nav#nav div#menu div.menu-official div.menu-official-name {
+  float: left;
+}
+
+nav#nav div#menu div.menu.space {
+  padding: 0 25px;
+  height: 39px;
+}
+nav#nav div#menu div.menu.space:hover {
+  background: rgba( 0, 0, 0, 0 )
+}
+
+nav#nav div#menu div.menu-default.label:hover {
+  background: rgba( 0, 0, 0, 0 )
+}
+nav#nav div#menu div.menu-default div.menu-default-name {
+  float: left;
+}
+nav#nav div#menu div.menu-default div.menu-default-icon {
+  float: right;
+  font-family: Condense;
+  font-weight: normal;
+}
+
+/* Main */
+
+section#main {
+  width: calc( 100% - 200px );
+  height: 100%;
+  top: 0;
+  left: 200px;
+  position: absolute;
+}
+
+section#main header#header {
+  width: calc( 100% - 200px - 50px );
+  height: 54px;
+  padding: 0 25px;
+  padding-top: 20px;
+  background: #fff;
+  border-bottom: 1px solid #E6E6E6;
+  position: fixed;
+}
+
+section#main header#header div#search {
+  width: 198px;
+  height: 24px;
+  padding: 0 25px;
+  padding-top: 9px;
+  border: 1px solid #E6E6E6;
+  border-radius: 3px;
+  font-size: 15px;
+  font-weight: bold;
+  float: left;
+  z-index: 9999;
+  position: absolute;
+}
+section#main header#header div#search textarea#search-input {
+  padding: 0;
+  margin: 0;
+  width: 183px;
+  height: 15px;
+  border: 0;
+  text-align: right;
+  font-size: 15px;
+  font-weight: bold;
+  resize: none;
+  font-family: 'Helvetica Neue', sans-serif;
+  float: left;
+  color: #646464;
+}
+section#main header#header div#search textarea#search-input:focus {
+  outline: 0;
+}
+section#main header#header div#search textarea#search-input::-webkit-input-placeholder {
+  color: #C8C8C8;
+}
+section#main header#header div#search div#search-icon {
+  font-family: Condense;
+  width: 15px;
+  float: left;
+  color: #646464;
+}
+
+section#main header#header div#channel {
+  position: absolute;
+  width: calc( 100% - 50px );
+  margin-top: 9px;
+  text-align: center;
+  z-index: 9998;
+}
+
+section#main header#header div#notification {
+  float: right;
+  color: #646464;
+  margin-top: 10px;
+  font-family: Condense;
+  margin-right: 25px;
+}
+section#main header#header div#notification div#notification-icon {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+}
+section#main header#header div#notification div#notification-new-wrap {
+  width: 15px;
+  height: 15px;
+}
+section#main header#header div#notification div#notification-new {
+  width: 7px;
+  height: 7px;
+  background: #4885ED;
+  border-radius: 100%;
+  border: 1px solid #fff;
+  margin: 0 7px;
+  position: absolute;
+}
+
+section#main header#header div#profile {
+  float: right;
+}
+section#main header#header div#profile div#profile-icon {
+  width: 33px;
+  height: 33px;
+  border: 1px solid #E6E6E6;
+  border-radius: 100%;
+  float: left;
+}
+section#main header#header div#profile div#profile-name {
+  float: left;
+  margin-top: 9px;
+  margin-left: 10px;
+}
+section#main header#header div#profile div#profile-menu-toggle {
+  width: 15px;
+  margin-top: 10px;
+  font-family: Condense;
+  float: left;
+  margin-left: 10px;
+}
+
+section#main div#chat {
+  width: calc( 100% - 316px - 50px );
+  padding: 20px 25px;
+  padding-top: calc( 75px + 20px );
+  float: left
+}
+section#main div#chat div.message {
+  margin-top: 20px;
+  font-size: 12px;
+}
+section#main div#chat div.message:first-child {
+  margin-top: 0
+}
+section#main div#chat div.message div.message-icon {
+  float: left;
+  width: 33px;
+  height: 33px;
+  border: 1px solid #E6E6E6;
+  border-radius: 100%;
+}
+section#main div#chat div.message div.message-body {
+  float: left;
+  margin-left: 10px;
+  width: calc( 100% - 45px )
+}
+section#main div#chat div.message div.message-body div.message-body-profile div.message-body-username,
+section#main div#chat div.message div.message-body div.message-body-profile div.message-body-id,
+section#main div#chat div.message div.message-body div.message-body-profile div.message-body-time {
+  float: left;
+  margin-right: 10px;
+}
+section#main div#chat div.message div.message-body div.message-body-profile div.message-body-id,
+section#main div#chat div.message div.message-body div.message-body-profile div.message-body-time {
+  color: #C8C8C8
+}
+section#main div#chat div.message div.message-body div.message-body-text {
+  margin-top: 10px;
+}
+section#main div#chat div#chat-input {
+  width: calc( 100% - 200px - 316px - 50px );
+  bottom: 0;
+  left: 225px;
+  background: #FAFAFA;
+  height: 55px;
+  position: fixed;
+}
+section#main div#chat div#chat-input textarea#chat-input-textarea {
+  padding: 0 25px;
+  padding-top: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #646464;
+  margin: 0;
+  font-family: 'Helvetica Neue', sans-serif;
+  resize: none;
+  width: calc( 100% - 2px - 50px );
+  height: 23px;
+  border: 1px solid #E6E6E6;
+  border-radius: 3px;
+}
+section#main div#chat div#chat-input textarea#chat-input-textarea:focus {
+  outline: 0;
+}
+section#main div#chat div#chat-input textarea#chat-input-textarea::-webkit-input-placeholder {
+  color: #C8C8C8;
+}
+
+section#main div#notification-center {
+  width: 316px;
+  height: calc( 100% - 75px - 20px - 20px );
+  position: absolute;
+  top: calc( 75px + 20px );
+  right: 0;
+  float: right
+}
+section#main div#notification-center div#notification-center-wrap {
+  height: 100%;
+  border-left: 5px solid #E6E6E6;
+  border-radius: 1px;
+}
+section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents {
+  padding: 0 25px;
+}
+section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.label {
+  border-bottom: 1px solid #E6E6E6;
+  padding-bottom: 5px;
+}
+section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification {
+  font-size: 12px;
+  margin-top: 20px;
+}
+section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.notification-text {
+  margin-bottom: 10px;
+}
+section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.message {
+  margin-top: 20px;
+  font-size: 12px;
+}
+section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.message:first-child {
+  margin-top: 0
+}
+section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.message div.message-icon {
+  float: left;
+  width: 33px;
+  height: 33px;
+  border: 1px solid #E6E6E6;
+  border-radius: 100%;
+}
+section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.message div.message-body {
+  float: left;
+  margin-left: 10px;
+  width: calc( 100% - 45px )
+}
+section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.message div.message-body div.message-body-profile div.message-body-username,
+section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.message div.message-body div.message-body-profile div.message-body-id,
+section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.message div.message-body div.message-body-profile div.message-body-time {
+  float: left;
+  margin-right: 10px;
+}
+section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.message div.message-body div.message-body-profile div.message-body-id,
+section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.message div.message-body div.message-body-profile div.message-body-time {
+  color: #C8C8C8
+}
+section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.message div.message-body div.message-body-text {
+  margin-top: 10px;
+}
