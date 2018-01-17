@@ -17,10 +17,12 @@
       </div>
 
       <div id="menu">
-        <div class="menu clearfix menu-official">
-          <div class="menu-official-icon">˘</div>
-          <div class="menu-official-name">Profile</div>
-        </div>
+        <a href="/profile">
+          <div class="menu clearfix menu-official" style="color: #fff">
+            <div class="menu-official-icon">˘</div>
+            <div class="menu-official-name">Profile</div>
+          </div>
+        </a>
         <div class="menu clearfix menu-official">
           <div class="menu-official-icon">¸</div>
           <div class="menu-official-name">Members</div>
@@ -59,59 +61,105 @@
       </header>
 
       <div id="chat">
-        <div id="messages">
-          <div class="message clearfix">
-            <div class="message-icon" style="background: url( resources/img/icon.png ); background-size: cover"></div>
-            <div class="message-body">
-              <div class="message-body-profile clearfix">
-                <div class="message-body-username">Cierra Labounty</div>
-                <div class="message-body-id">@cierra</div>
-                <div class="message-body-time">17:30</div>
-              </div>
-              <div class="message-body-text">What are you guys doing this weekend ?</div>
-            </div>
-          </div>
-          <div class="message clearfix">
-            <div class="message-icon" style="background: url( resources/img/icon.png ); background-size: cover"></div>
-            <div class="message-body">
-              <div class="message-body-profile clearfix">
-                <div class="message-body-username">Cierra Labounty</div>
-                <div class="message-body-id">@cierra</div>
-                <div class="message-body-time">17:30</div>
-              </div>
-              <div class="message-body-text">What are you guys doing this weekend ?</div>
-            </div>
-          </div>
-          <div class="message clearfix">
-            <div class="message-icon" style="background: url( resources/img/icon.png ); background-size: cover"></div>
-            <div class="message-body">
-              <div class="message-body-profile clearfix">
-                <div class="message-body-username">Cierra Labounty</div>
-                <div class="message-body-id">@cierra</div>
-                <div class="message-body-time">17:30</div>
-              </div>
-              <div class="message-body-text">What are you guys doing this weekend ?</div>
-            </div>
-          </div>
-        </div>
+        <div id="messages"></div>
         <div id="chat-input">
           <textarea id="chat-input-textarea" placeholder="Message to General" onkeyup="auto()"></textarea>
         </div>
       </div>
     </section>
 
+    <script src="/socket.io/socket.io.js"></script>
     <script>
-    const w = document.getElementById( 'chat-input' )
-    const e = document.getElementById( 'chat-input-textarea' )
-    const c = document.getElementById( 'chat' )
+    const socket = io()
+
+    const chatInput = document.getElementById( 'chat-input' )
+    const chatInputTextarea = document.getElementById( 'chat-input-textarea' )
+    const chat = document.getElementById( 'chat' )
+    const searchInput = document.getElementById( 'search-input' )
+
+    let isControlLeft = false
+    chatInputTextarea.addEventListener( 'keydown', e => {
+      if( e.code === 'ControlLeft' ){ isControlLeft = true; return }
+      if( e.code === 'Enter' && isControlLeft ){
+        const message = chatInputTextarea.value
+        if( message === '' ) return
+        socket.emit( 'message', message )
+        chatInputTextarea.value = ''
+      }
+
+      isControlLeft = false
+    } )
+
+    searchInput.addEventListener( 'keydown', e => {
+      if( e.code === 'Enter' ){
+        e.preventDefault()
+
+        const word = searchInput.value
+
+        const _messages = []
+        messages.forEach( message => {
+          if( message.message.indexOf( word ) !== -1 ) _messages.push( message )
+        } )
+
+        render( _messages )
+      }
+    } )
 
     const auto = _ => {
-      const eh = 23 + ( ( e.value.split( '\n' ).length - 1 ) * 15 )
+      const eh = 23 + ( ( chatInputTextarea.value.split( '\n' ).length - 1 ) * 15 )
       const wh = ( 55 - 23 ) + eh
-      e.style.height = eh + 'px'
-      w.style.height = wh + 'px'
-      c.style.marginBottom = wh + 'px'
+      chatInputTextarea.style.height = eh + 'px'
+      chatInput.style.height = wh + 'px'
+      chat.style.marginBottom = wh + 'px'
     }
+
+    const setProfile = profile => {
+      document.getElementById( 'profile-icon' ).style.background = 'url(' + profile.icon + ')'
+      document.getElementById( 'profile-icon' ).style.backgroundSize = 'cover'
+      document.getElementById( 'profile-name' ).innerHTML = profile.name
+    }
+
+    const render = messages => {
+      const e = document.getElementById( 'messages' )
+      e.innerHTML = ''
+
+      messages.forEach( message => {
+        e.innerHTML += `<div class="message clearfix">
+          <div class="message-icon" style="background: url( ${users[message.id].icon} ); background-size: cover"></div>
+          <div class="message-body">
+            <div class="message-body-profile clearfix">
+              <div class="message-body-username">${users[message.id].name}</div>
+              <div class="message-body-time">${message.time}</div>
+            </div>
+            <div class="message-body-text">${message.message}</div>
+          </div>
+        </div>`
+      } )
+    }
+
+    let messages
+    let users
+
+    const getUsers = _users => {
+      users = _users
+    }
+
+    const getMessages = _messages => {
+      messages = _messages
+      render( messages )
+    }
+
+    socket.on( 'profile:get', setProfile )
+    socket.on( 'profile:all', getUsers )
+    socket.on( 'messages', getMessages )
+    socket.on( 'message', message => {
+      messages.push( message )
+      render( messages )
+    } )
+
+    socket.emit( 'profile:get' )
+    socket.emit( 'profile:all' )
+    socket.emit( 'messages' )
     </script>
   </body>
 

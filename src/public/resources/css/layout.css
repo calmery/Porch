@@ -42,9 +42,9 @@ nav#nav {
 }
 
 nav#nav div#room {
-  padding: 0 25px;
   width: 150px;
-  margin-top: 30px;
+  height: 15px;
+  padding: 30px 25px;
 }
 nav#nav div#room div#room-name {
   float: left
