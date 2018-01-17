@@ -94,10 +94,83 @@ passwordless.addDelivery( ( tokenToSend, uidToSend, recipient, callback ) => {
   const host = '127.0.0.1:3000'
 
   smtpServer.send( {
-    text: 'Hello!\nAccess your account here: http://' + host + '?token=' + tokenToSend + '&uid=' + encodeURIComponent( uidToSend ),
-    from: user + '@gmail.com',
+    text: 'Hello !\nYou asked us to send you a magic link for quickly signing in to your porch conversation. Sign in to Porch.\nhttp://' + host + '?token=' + tokenToSend + '&uid=' + encodeURIComponent( uidToSend ),
+    from: 'Porch <' + user + '>',
     to: recipient,
-    subject: 'Token for ' + host
+    subject: 'Token for ' + host,
+    attachment: [
+        {
+          data: `
+          <!DOCTYPE html>
+          <html>
+
+            <head>
+              <style>
+              body {
+                padding: 0;
+                margin: 0;
+                background: #FAFAFA;
+                font-family: 'Helvetica Neue', sans-serif;
+                font-weight: bold;
+                font-size: 15px;
+                color: #646464;
+              }
+
+              a {
+                text-decoration: none;
+                color: #FFF;
+              }
+
+              div#container {
+                width: 398px;
+                padding: 25px;
+                background: #FFF;
+                border-radius: 3px;
+                border: 1px solid #E6E6E6;
+                margin: 10px auto 20px auto;
+              }
+
+              div#container div#greeting {
+                color: #4885ED;
+                margin-bottom: 10px;
+              }
+
+              div#container div#button {
+                width: 250px;
+                padding: 10px 0;
+                background: #4885ED;
+                margin: 0 auto;
+                margin-top: 10px;
+                text-align: center;
+                border-radius: 3px;
+              }
+
+              div#title {
+                text-align: center;
+                color: #4885ED;
+                font-size: 20px;
+                margin-bottom: 10px;
+                margin-top: 20px;
+              }
+              </style>
+            </head>
+
+            <body>
+              <div id="title">Porch</div>
+              <div id="container">
+                <div id="greeting">Hello !</div>
+                You asked us to send you a magic link for quickly signing in to your porch conversation.
+                <a href="http://${host}?token=${tokenToSend}&uid=${encodeURIComponent( uidToSend )}">
+                  <div id="button">Sign in to Porch<div>
+                </a>
+              </body>
+            </body>
+
+          </html>
+          `,
+          alternative: true
+        },
+      ]
   }, ( error, message ) => {
     if( error ){ console.log( error ) }
     callback( error )
