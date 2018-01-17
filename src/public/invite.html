@@ -3,7 +3,7 @@
 
   <head>
     <meta charset="utf-8">
-    <title>Small Porch - Login</title>
+    <title>Small Porch - Invite</title>
 
     <link rel="stylesheet" href="resources/css/normalize.css">
     <link rel="stylesheet" href="resources/css/layout-index.css">
@@ -45,7 +45,6 @@
 
       <header id="header" class="clearfix">
         <a href="/"><div id="title">Small Porch</div></a>
-        <a href="/docs"><div class="menu">Documentation</div></a>
         <a href="https://github.com/calmery/Porch">
           <div id="github">
             <img src="resources/img/github.png">
@@ -54,9 +53,9 @@
       </header>
 
       <div id="screen" style="height: auto; padding-bottom: 50px;">
-        <div id="keywords">Send magic sign-in link to your email address</div>
+        <div id="keywords">Send magic sign-in link to email address</div>
         <div id="input">
-          <textarea id="email" placeholder="Please enter your email address"></textarea>
+          <textarea id="email" placeholder="Please enter email address"></textarea>
         </div>
         <!--
         <form action="/request" method="POST">
@@ -83,7 +82,8 @@
           form.appendChild( user )
           document.body.appendChild( form )
           form.submit()
-          alert( 'Check your mailbox.' )
+          alert( 'Invited.' )
+          window.location.href = '/conversation'
         } else {
           alert( 'Doesn’t look like a valid email.' )
         }

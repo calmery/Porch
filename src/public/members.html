@@ -8,10 +8,6 @@
     <link rel="stylesheet" href="resources/css/normalize.css">
     <link rel="stylesheet" href="resources/css/layout.css">
     <style>
-    .content-label {
-      font-size: 12px;
-      margin-bottom: 5px;
-    }
 
     #username {
       border: 1px solid #E6E6E6;
@@ -71,13 +67,13 @@
 
       <div id="menu">
         <a href="/profile">
-          <div class="menu selected clearfix menu-official" style="color: #fff">
+          <div class="menu clearfix menu-official" style="color: #fff">
             <div class="menu-official-icon">˘</div>
             <div class="menu-official-name">Profile</div>
           </div>
         </a>
         <a href="/members">
-          <div class="menu clearfix menu-official" style="color: #fff">
+          <div class="menu selected clearfix menu-official" style="color: #fff">
             <div class="menu-official-icon">¸</div>
             <div class="menu-official-name">Members</div>
           </div>
@@ -107,67 +103,59 @@
 
     <section id="main">
       <header id="header">
-        <div id="channel">My Profile</div>
+        <div id="channel">Members</div>
         <div id="header-front">
-          <div id="profile">
+          <a href="/profile"><div id="profile" style="color: #646464;">
             <div id="profile-icon"></div>
             <div id="profile-name"></div>
-          </div>
+          </div></a>
         </div>
       </header>
 
       <div id="chat">
-        <div class="content">
-          <div class="content-label">Name</div>
-          <textarea id="username" placeholder="Name"></textarea>
-        </div>
-
-        <div class="content">
-          <div class="content-label">Icon ~500KB</div>
-          <input type="file" id="icon" accept=".jpg,.gif,.png,image/gif,image/jpeg,image/png">
-        </div>
-
-        <div id="submit" onclick="submit()">
-          Update profile
-        </div>
+        <div id="messages"></div>
       </div>
     </section>
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
-    const submit = _ => {
-      const name = document.getElementById( 'username' ).value
-      const icon = document.getElementById( 'icon' ).files[0]
-
-      if( icon && icon.size > 500000 ){
-        alert( 'File size limit exceeded. ' )
-        return
-      }
-
-      if( icon ){
-        const fileReader = new FileReader()
-        fileReader.onload = e => {
-          const base64 = e.target.result
-          socket.emit( 'profile:update', { name, icon: base64 } )
-        }
-        fileReader.readAsDataURL( icon )
-      } else socket.emit( 'profile:update', { name } )
-    }
-
     const socket = io()
 
     const setProfile = profile => {
       document.getElementById( 'profile-icon' ).style.background = 'url(' + profile.icon + ')'
       document.getElementById( 'profile-icon' ).style.backgroundSize = 'cover'
       document.getElementById( 'profile-name' ).innerHTML = profile.name
-
-      document.getElementById( 'username' ).value = profile.name
     }
 
-    socket.on( 'profile:updated', setProfile )
+    const render = profiles => {
+      const e = document.getElementById( 'messages' )
+      e.innerHTML = ''
+
+      Object.values( profiles ).forEach( profile => {
+        e.innerHTML += `<div class="message clearfix">
+          <div class="message-icon" style="background: url( ${profile.icon} ); background-size: cover"></div>
+          <div class="message-body">
+            <div class="message-body-profile clearfix" style="padding-top: 5px">
+              <div class="message-body-username">${profile.name}</div>
+            </div>
+            <div class="message-body-text" style="margin-top: 0;">${profile.online ? 'Online' : 'Offline'}</div>
+          </div>
+        </div>`
+      } )
+    }
+
+    let profiles
+
+    const getProfiles = _profiles => {
+      profiles = _profiles
+      render( profiles )
+    }
+
     socket.on( 'profile:get', setProfile )
+    socket.on( 'profile:all', getProfiles )
 
     socket.emit( 'profile:get' )
+    socket.emit( 'profile:all' )
     </script>
   </body>
 

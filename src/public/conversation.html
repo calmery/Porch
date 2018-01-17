@@ -3,7 +3,7 @@
 
   <head>
     <meta charset="utf-8">
-    <title>Porch</title>
+    <title>Small Porch - Conversation</title>
 
     <link rel="stylesheet" href="resources/css/normalize.css">
     <link rel="stylesheet" href="resources/css/layout.css">
@@ -23,10 +23,12 @@
             <div class="menu-official-name">Profile</div>
           </div>
         </a>
-        <div class="menu clearfix menu-official">
-          <div class="menu-official-icon">¸</div>
-          <div class="menu-official-name">Members</div>
-        </div>
+        <a href="/members">
+          <div class="menu clearfix menu-official" style="color: #fff">
+            <div class="menu-official-icon">¸</div>
+            <div class="menu-official-name">Members</div>
+          </div>
+        </a>
         <div class="menu space"></div>
         <div class="menu label clearfix menu-default">
           <div class="menu-default-name">Channels</div>
@@ -37,10 +39,14 @@
           <div class="menu-default-icon"></div>
         </div>
         <div class="menu space"></div>
-        <div class="menu label clearfix menu-default">
+        <a href="/invite"><div class="menu label clearfix menu-default" style="color: #fff">
           <div class="menu-default-name">Invite</div>
           <div class="menu-default-icon">ï</div>
-        </div>
+        </div></a>
+        <div class="menu space"></div>
+        <a href="/logout"><div class="menu clearfix menu-default" style="color: #fff; font-size: 15px">
+          <div class="menu-default-name">Sign out</div>
+        </div></a>
       </div>
     </nav>
 
@@ -53,10 +59,10 @@
             <textarea id="search-input" placeholder="Search"></textarea>
           </div>
 
-          <div id="profile">
-            <div id="profile-icon" style="background: url( resources/img/icon.png ); background-size: cover"></div>
-            <div id="profile-name">Cierra Labounty</div>
-          </div>
+          <a href="/profile"><div id="profile" style="color: #646464;">
+            <div id="profile-icon"></div>
+            <div id="profile-name"></div>
+          </div></a>
         </div>
       </header>
 
