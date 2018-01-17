@@ -15,11 +15,20 @@
 }
 
 body {
+  opacity: 0;
   background: #FAFAFA;
   font-family: 'Helvetica Neue', sans-serif;
   font-weight: bold;
   font-size: 15px;
-  color: #646464
+  color: #646464;
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  0% {}
+  100% {
+    opacity: 1
+  }
 }
 
 nav#nav {
@@ -120,7 +129,6 @@ section#main header#header div#header-front {
 }
 
 section#main header#header div#search {
-  width: 198px;
   height: 24px;
   padding: 0 25px;
   padding-top: 9px;
@@ -133,7 +141,7 @@ section#main header#header div#search {
 section#main header#header div#search textarea#search-input {
   padding: 0;
   margin: 0;
-  width: 183px;
+  width: 133px;
   height: 15px;
   padding-top: 2px;
   border: 0;
@@ -144,9 +152,11 @@ section#main header#header div#search textarea#search-input {
   font-family: 'Helvetica Neue', sans-serif;
   float: left;
   color: #646464;
+  -webkit-transition: 0.5s ease;
 }
 section#main header#header div#search textarea#search-input:focus {
   outline: 0;
+  width: 183px;
 }
 section#main header#header div#search textarea#search-input::-webkit-input-placeholder {
   color: #C8C8C8;
@@ -248,6 +258,10 @@ section#main div#chat div#chat-input textarea#chat-input-textarea {
   height: 23px;
   border: 1px solid #E6E6E6;
   border-radius: 3px;
+  line-height: 15px;
+  -webkit-transition: 0.3s ease;
+  bottom: 25px;
+  position: absolute;
 }
 section#main div#chat div#chat-input textarea#chat-input-textarea:focus {
   outline: 0;

@@ -95,10 +95,24 @@
           </div>
         </div>
         <div id="chat-input">
-          <textarea id="chat-input-textarea" placeholder="Message to General"></textarea>
+          <textarea id="chat-input-textarea" placeholder="Message to General" onkeyup="auto()"></textarea>
         </div>
       </div>
     </section>
+
+    <script>
+    const w = document.getElementById( 'chat-input' )
+    const e = document.getElementById( 'chat-input-textarea' )
+    const c = document.getElementById( 'chat' )
+
+    const auto = _ => {
+      const eh = 23 + ( ( e.value.split( '\n' ).length - 1 ) * 15 )
+      const wh = ( 55 - 23 ) + eh
+      e.style.height = eh + 'px'
+      w.style.height = wh + 'px'
+      c.style.marginBottom = wh + 'px'
+    }
+    </script>
   </body>
 
 </html>
