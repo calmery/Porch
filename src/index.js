@@ -46,6 +46,10 @@ app.get( '/', ( request, response ) =>
   response.sendFile( path.resolve( __dirname, 'public/index.html' ) )
 )
 
+app.get( '/docs', ( request, response ) =>
+  response.sendFile( path.resolve( __dirname, 'public/docs.html' ) )
+)
+
 app.get( '/conversation', passwordless.restricted( { failureRedirect: '/login' } ), ( request, response ) =>
   response.sendFile( path.resolve( __dirname, 'public/conversation.html' ) )
 )
@@ -65,7 +69,7 @@ app.post( '/request', passwordless.requestToken(
   ( user, delivery, callback, req ) => {
     callback( null, user )
   } ), ( req, res ) => {
-    res.sendFile( path.resolve( __dirname, 'public/request.html' ) )
+    response.redirect( '/' )
   }
 )
 
