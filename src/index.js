@@ -54,6 +54,14 @@ app.get( '/conversation', passwordless.restricted( { failureRedirect: '/login' }
   response.sendFile( path.resolve( __dirname, 'public/conversation.html' ) )
 )
 
+app.get( '/invite', passwordless.restricted( { failureRedirect: '/login' } ), ( request, response ) =>
+  response.sendFile( path.resolve( __dirname, 'public/invite.html' ) )
+)
+
+app.get( '/members', passwordless.restricted( { failureRedirect: '/login' } ), ( request, response ) =>
+  response.sendFile( path.resolve( __dirname, 'public/members.html' ) )
+)
+
 app.get( '/profile', passwordless.restricted( { failureRedirect: '/login' } ), ( request, response ) =>
   response.sendFile( path.resolve( __dirname, 'public/profile.html' ) )
 )
@@ -65,13 +73,9 @@ app.get( '/login', ( request, response ) => {
 
 app.get( '/logout', passwordless.logout(), ( _, response ) => response.redirect( '/' ) )
 
-app.post( '/request', passwordless.requestToken(
-  ( user, delivery, callback, req ) => {
-    callback( null, user )
-  } ), ( req, res ) => {
-    response.redirect( '/' )
-  }
-)
+app.post( '/request', passwordless.requestToken( ( user, delivery, callback, req ) => { callback( null, user ) } ), ( _, response ) => {
+  response.redirect( '/' )
+} )
 
 app.use( express.static( path.resolve( __dirname, 'public' ) ) )
 
@@ -203,8 +207,11 @@ io.on( 'connection', socket => {
     users[socket.porchId] = {
       id: socket.porchId,
       name: socket.porchId,
-      icon: defaultIcons[0]
+      icon: defaultIcons[0],
+      online: true
     }
+
+  users[socket.porchId].online = true
 
   socket.on( 'messages', _ => socket.emit( 'messages', messages.slice( -100 ) ) )
   socket.on( 'users', _ => socket.emit( 'users', users ) )
@@ -221,6 +228,10 @@ io.on( 'connection', socket => {
   } )
   socket.on( 'profile:get', id => socket.emit( 'profile:get', id ? users[id] : users[socket.porchId] ) )
   socket.on( 'profile:all', _ => socket.emit( 'profile:all', users ) )
+
+  socket.on( 'disconnect', _ => {
+    users[socket.porchId].online = false
+  } )
 
   socket.on( 'message', message => {
     if( socket.porchId ){
