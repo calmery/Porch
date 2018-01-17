@@ -166,32 +166,6 @@ section#main header#header div#channel {
   z-index: 9998;
 }
 
-section#main header#header div#notification {
-  float: right;
-  color: #646464;
-  margin-top: 10px;
-  font-family: Condense;
-  margin-right: 25px;
-}
-section#main header#header div#notification div#notification-icon {
-  width: 15px;
-  height: 15px;
-  position: absolute;
-}
-section#main header#header div#notification div#notification-new-wrap {
-  width: 15px;
-  height: 15px;
-}
-section#main header#header div#notification div#notification-new {
-  width: 7px;
-  height: 7px;
-  background: #4885ED;
-  border-radius: 100%;
-  border: 1px solid #fff;
-  margin: 0 7px;
-  position: absolute;
-}
-
 section#main header#header div#profile {
   float: right;
 }
@@ -216,7 +190,7 @@ section#main header#header div#profile div#profile-menu-toggle {
 }
 
 section#main div#chat {
-  width: calc( 100% - 316px - 50px );
+  width: calc( 100% - 50px );
   padding: 20px 25px;
   padding-top: calc( 75px + 20px );
   float: left
@@ -254,7 +228,7 @@ section#main div#chat div.message div.message-body div.message-body-text {
   margin-top: 10px;
 }
 section#main div#chat div#chat-input {
-  width: calc( 100% - 200px - 316px - 50px );
+  width: calc( 100% - 200px - 50px );
   bottom: 0;
   left: 225px;
   background: #FAFAFA;
@@ -280,64 +254,4 @@ section#main div#chat div#chat-input textarea#chat-input-textarea:focus {
 }
 section#main div#chat div#chat-input textarea#chat-input-textarea::-webkit-input-placeholder {
   color: #C8C8C8;
-}
-
-section#main div#notification-center {
-  width: 316px;
-  height: calc( 100% - 75px - 20px - 20px );
-  position: absolute;
-  top: calc( 75px + 20px );
-  right: 0;
-  float: right
-}
-section#main div#notification-center div#notification-center-wrap {
-  height: 100%;
-  border-left: 5px solid #E6E6E6;
-  border-radius: 1px;
-}
-section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents {
-  padding: 0 25px;
-}
-section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.label {
-  border-bottom: 1px solid #E6E6E6;
-  padding-bottom: 5px;
-}
-section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification {
-  font-size: 12px;
-  margin-top: 20px;
-}
-section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.notification-text {
-  margin-bottom: 10px;
-}
-section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.message {
-  margin-top: 20px;
-  font-size: 12px;
-}
-section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.message:first-child {
-  margin-top: 0
-}
-section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.message div.message-icon {
-  float: left;
-  width: 33px;
-  height: 33px;
-  border: 1px solid #E6E6E6;
-  border-radius: 100%;
-}
-section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.message div.message-body {
-  float: left;
-  margin-left: 10px;
-  width: calc( 100% - 45px )
-}
-section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.message div.message-body div.message-body-profile div.message-body-username,
-section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.message div.message-body div.message-body-profile div.message-body-id,
-section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.message div.message-body div.message-body-profile div.message-body-time {
-  float: left;
-  margin-right: 10px;
-}
-section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.message div.message-body div.message-body-profile div.message-body-id,
-section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.message div.message-body div.message-body-profile div.message-body-time {
-  color: #C8C8C8
-}
-section#main div#notification-center div#notification-center-wrap div#notification-center-wrap-contents div.notification div.message div.message-body div.message-body-text {
-  margin-top: 10px;
 }
