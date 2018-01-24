@@ -13,7 +13,9 @@ view : Model -> Html Msg
 view model =
     section []
         [ createNavigation model
-        , if model.page == "/" then
+        , if model.account.name == "" || model.account.screen_name == "" then
+            createProfilePage model
+          else if model.page == "/" then
             createChatPage model
           else if model.page == "/profile" then
             createProfilePage model
@@ -119,7 +121,7 @@ createHeader model title =
         [ div [ id "channel" ]
             [ text title ]
         , div [ id "header-front" ]
-            ((if model.page == "/" then
+            ((if model.account.name /= "" && model.account.screen_name /= "" && model.page == "/" then
                 [ div [ id "search" ]
                     [ div [ id "search-icon" ]
                         [ text "[" ]
