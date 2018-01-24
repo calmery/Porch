@@ -32,8 +32,7 @@ const backend = {
   externals: [nodeExternals()]
 }
 
-const frontend = {
-  entry: resolve( 'src/public/entry.js' ),
+const frontend = merge( common, {
   module: {
     rules: [{
       test: /\.elm$/,
@@ -75,14 +74,32 @@ const frontend = {
   },
   plugins: [
     new MinifyPlugin()
+  ]
+} )
+
+const conversation = {
+  entry: resolve( 'src/public/entry.js' ),
+  output: {
+    path: resolve( './dist/public/' ),
+    filename: 'conversation.js'
+  }
+}
+
+const index = {
+  entry: resolve( 'src/public/entry-index.js' ),
+  plugins: [
+    new CopyWebpackPlugin( [
+      { from: resolve( 'src/public/static/img' ), to: resolve( 'dist/public/img' ) },
+    ] )
   ],
   output: {
     path: resolve( './dist/public/' ),
-    filename: 'app.js'
+    filename: 'index.js'
   }
 }
 
 module.exports = [
   merge( common, backend ),
-  merge( common, frontend )
+  merge( merge( common, frontend ), conversation ),
+  merge( merge( common, frontend ), index )
 ]

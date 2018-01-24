@@ -1,8 +1,5 @@
 import Elm from './elm/Main.elm'
 
-import './static/index.html'
-import './static/login.html'
-
 import './static/conversation.html'
 import 'normalize.css'
 import './static/css/layout.css'

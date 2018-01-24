@@ -61,8 +61,8 @@ app.get( `/login`, ( request, response ) => {
 
 app.get( `/logout`, passwordless.logout(), ( _, response ) => response.redirect( '/' ) )
 
-app.post( '/request', passwordless.requestToken( ( user, delivery, callback, request ) => callback( null, user ) ), ( _, response ) =>
-  response.redirect( '/' )
+app.post( `/request`, passwordless.requestToken( ( user, delivery, callback, request ) => callback( null, user ) ), ( _, response ) =>
+  response.status( 200 ).send( 'Check your mailbox' )
 )
 
 app.use( express.static( path.resolve( __dirname, 'public' ) ) )

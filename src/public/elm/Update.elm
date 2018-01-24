@@ -4,7 +4,6 @@ import List exposing (filter, append)
 import Json.Decode exposing (..)
 import Port exposing (..)
 import Model exposing (..)
-
 import String exposing (indexes)
 
 
@@ -27,15 +26,27 @@ type Msg
 
 createStyle : String -> Style
 createStyle input =
-  let
-    l = List.length <| indexes "\n" input
-    eh = 23 + ( l * 15 )
-    wh = ( 55 - 23 ) + eh + 5
-    chatInputTextarea = ( toString eh ) ++ "px"
-    chatInput = ( toString wh ) ++ "px"
-    chat = ( toString wh ) ++ "px"
-  in
-    Style chatInputTextarea chatInput chat
+    let
+        l =
+            List.length <| indexes "\n" input
+
+        eh =
+            23 + (l * 15)
+
+        wh =
+            (55 - 23) + eh + 5
+
+        chatInputTextarea =
+            (toString eh) ++ "px"
+
+        chatInput =
+            (toString wh) ++ "px"
+
+        chat =
+            (toString wh) ++ "px"
+    in
+        Style chatInputTextarea chatInput chat
+
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -141,15 +152,16 @@ update msg model =
 
         CheckCommand command ->
             if model.command == 17 && command == 13 then
-              update SendMessage model
+                update SendMessage model
             else
-              ( { model | command = command }, Cmd.none )
+                ( { model | command = command }, Cmd.none )
 
         InputMessage input ->
             let
-              s = createStyle input
+                s =
+                    createStyle input
             in
-              ( { model | temp = Temp model.temp.name model.temp.screen_name input model.temp.search, styles = s }, Cmd.none )
+                ( { model | temp = Temp model.temp.name model.temp.screen_name input model.temp.search, styles = s }, Cmd.none )
 
         InputSearchWord input ->
             ( { model | temp = Temp model.temp.name model.temp.screen_name model.temp.message input }, Cmd.none )

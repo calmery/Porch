@@ -29,11 +29,13 @@ type alias Temp =
     , search : String
     }
 
+
 type alias Style =
-  { chatInputTextarea : String
-  , chatInput : String
-  , chat : String
-  }
+    { chatInputTextarea : String
+    , chatInput : String
+    , chat : String
+    }
+
 
 type alias Model =
     { statuses : List Status
