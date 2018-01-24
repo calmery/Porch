@@ -5,6 +5,8 @@ import Json.Decode exposing (..)
 import Port exposing (..)
 import Model exposing (..)
 
+import String exposing (indexes)
+
 
 type Msg
     = StatusesTimeline String
@@ -20,7 +22,20 @@ type Msg
     | ChangePage String
     | InputMessage String
     | InputSearchWord String
+    | CheckCommand Int
 
+
+createStyle : String -> Style
+createStyle input =
+  let
+    l = List.length <| indexes "\n" input
+    eh = 23 + ( l * 15 )
+    wh = ( 55 - 23 ) + eh + 5
+    chatInputTextarea = ( toString eh ) ++ "px"
+    chatInput = ( toString wh ) ++ "px"
+    chat = ( toString wh ) ++ "px"
+  in
+    Style chatInputTextarea chatInput chat
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -114,7 +129,7 @@ update msg model =
                         ( { model | error = error }, Cmd.none )
 
         SendMessage ->
-            ( { model | temp = Temp model.temp.name model.temp.screen_name "" model.temp.search }
+            ( { model | temp = Temp model.temp.name model.temp.screen_name "" model.temp.search, styles = createStyle "" }
             , if model.temp.message /= "" then
                 sendMessage model.temp.message
               else
@@ -124,8 +139,17 @@ update msg model =
         ChangePage page ->
             ( { model | page = page }, Cmd.none )
 
+        CheckCommand command ->
+            if model.command == 17 && command == 13 then
+              update SendMessage model
+            else
+              ( { model | command = command }, Cmd.none )
+
         InputMessage input ->
-            ( { model | temp = Temp model.temp.name model.temp.screen_name input model.temp.search }, Cmd.none )
+            let
+              s = createStyle input
+            in
+              ( { model | temp = Temp model.temp.name model.temp.screen_name input model.temp.search, styles = s }, Cmd.none )
 
         InputSearchWord input ->
             ( { model | temp = Temp model.temp.name model.temp.screen_name model.temp.message input }, Cmd.none )

@@ -6,6 +6,7 @@ import Html.Attributes exposing (..)
 import Update exposing (Msg(..))
 import Model exposing (Model, User, Status)
 import List exposing (append)
+import Json.Decode
 
 
 view : Model -> Html Msg
@@ -106,6 +107,10 @@ setMenuOption page model =
 
 -- Helper
 
+onKeyDown : (Int -> msg) -> Attribute msg
+onKeyDown tagger =
+  Html.Events.on "keydown" (Json.Decode.map tagger Html.Events.keyCode)
+
 
 createHeader : Model -> String -> Html Msg
 createHeader model title =
@@ -143,7 +148,7 @@ createChatPage : Model -> Html Msg
 createChatPage model =
     section [ id "main" ]
         [ createHeader model "General"
-        , div [ id "chat" ]
+        , div [ id "chat", style [("margin-bottom", model.styles.chat)] ]
             [ div [ id "messages" ]
                 (if model.temp.search == "" then
                     (List.map
@@ -179,8 +184,8 @@ createChatPage model =
                         List.filter (\status -> String.contains model.temp.search status.text) model.statuses
                     )
                 )
-            , div [ id "chat-input" ]
-                [ textarea [ onInput InputMessage, id "chat-input-textarea", placeholder "Message to General", Html.Attributes.value model.temp.message ]
+            , div [ id "chat-input", style [("height", model.styles.chatInput)] ]
+                [ textarea [ onInput InputMessage, onKeyDown CheckCommand, id "chat-input-textarea", placeholder "Message to General", Html.Attributes.value model.temp.message, style [("height", model.styles.chatInputTextarea)] ]
                     []
                 , div [ onClick SendMessage, id "chat-input-send" ]
                     [ text "Send" ]

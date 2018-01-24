@@ -1,9 +1,9 @@
-module Model exposing (Model, initialModel, Status, User, Temp)
+module Model exposing (Model, initialModel, Status, User, Temp, Style)
 
 
 initialModel : Model
 initialModel =
-    Model [] [] (User "" "" "" "" "") "" (Temp "" "" "" "") "/"
+    Model [] [] (User "" "" "" "" "") "" (Temp "" "" "" "") "/" (Style "23px" "55px" "55px") 0
 
 
 type alias Status =
@@ -29,6 +29,11 @@ type alias Temp =
     , search : String
     }
 
+type alias Style =
+  { chatInputTextarea : String
+  , chatInput : String
+  , chat : String
+  }
 
 type alias Model =
     { statuses : List Status
@@ -37,4 +42,6 @@ type alias Model =
     , error : String
     , temp : Temp
     , page : String
+    , styles : Style
+    , command : Int
     }
