@@ -48,16 +48,9 @@ app.get( `/`, ( request, response ) =>
   response.sendFile( path.resolve( __dirname, 'public/index.html' ) )
 )
 
-app.get( `/conversation`, passwordless.restricted( { failureRedirect: '/login' } ), ( _, response ) =>
+app.get( `/conversation`, passwordless.restricted( { failureRedirect: '/' } ), ( _, response ) =>
   response.sendFile( path.resolve( __dirname, 'public/conversation.html' ) )
 )
-
-app.get( `/login`, ( request, response ) => {
-  if( request.user )
-    response.redirect( '/conversation' )
-  else
-    response.sendFile( path.resolve( __dirname, 'public/login.html' ) )
-} )
 
 app.get( `/logout`, passwordless.logout(), ( _, response ) => response.redirect( '/' ) )
 
