@@ -6,9 +6,11 @@ COPY package-lock.json /home/node
 WORKDIR /home/node
 
 RUN rm -rf node_modules &&\
-    npm i --production
+    npm i
 
-COPY src /home/node/src
+COPY . /home/node/
+
+RUN npm run build
 
 EXPOSE 3000
 

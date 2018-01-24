@@ -63,14 +63,14 @@ nav#nav div#menu {
 nav#nav div#menu div.menu {
   width: 150px;
   padding: 11px 25px;
+  -webkit-transition: 0.5s ease;
 }
 
 nav#nav div#menu div.menu:hover {
   background: #3471D9;
-  -webkit-transition: 0.5s ease;
 }
 nav#nav div#menu div.menu.selected {
-  background: #3471D9
+  background: #3471D9;
 }
 nav#nav div#menu div.menu-official div.menu-official-icon {
   float: left;
@@ -225,11 +225,13 @@ section#main div#chat div.message div.message-body {
   width: calc( 100% - 45px )
 }
 section#main div#chat div.message div.message-body div.message-body-profile div.message-body-username,
+section#main div#chat div.message div.message-body div.message-body-profile div.message-body-screen_name,
 section#main div#chat div.message div.message-body div.message-body-profile div.message-body-id,
 section#main div#chat div.message div.message-body div.message-body-profile div.message-body-time {
   float: left;
   margin-right: 10px;
 }
+section#main div#chat div.message div.message-body div.message-body-profile div.message-body-screen_name,
 section#main div#chat div.message div.message-body div.message-body-profile div.message-body-id,
 section#main div#chat div.message div.message-body div.message-body-profile div.message-body-time {
   color: #C8C8C8
@@ -245,6 +247,26 @@ section#main div#chat div#chat-input {
   height: 55px;
   position: fixed;
 }
+section#main div#chat div#chat-input div#chat-input-send {
+  padding: 0 25px;
+  padding-top: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #FFFFFF;
+  margin: 0;
+  font-family: 'Helvetica Neue', sans-serif;
+  resize: none;
+  width: 28px;
+  height: 23px;
+  border: 1px solid #3471D9;
+  border-radius: 3px;
+  line-height: 15px;
+  -webkit-transition: 0.3s ease;
+  bottom: 25px;
+  background: #4885ED;
+  right: 0;
+  position: absolute;
+}
 section#main div#chat div#chat-input textarea#chat-input-textarea {
   padding: 0 25px;
   padding-top: 10px;
@@ -254,13 +276,14 @@ section#main div#chat div#chat-input textarea#chat-input-textarea {
   margin: 0;
   font-family: 'Helvetica Neue', sans-serif;
   resize: none;
-  width: calc( 100% - 2px - 50px );
+  width: calc( 100% - 2px - 50px - 90px );
   height: 23px;
   border: 1px solid #E6E6E6;
   border-radius: 3px;
   line-height: 15px;
   -webkit-transition: 0.3s ease;
   bottom: 25px;
+  left: 0;
   position: absolute;
 }
 section#main div#chat div#chat-input textarea#chat-input-textarea:focus {
@@ -268,4 +291,57 @@ section#main div#chat div#chat-input textarea#chat-input-textarea:focus {
 }
 section#main div#chat div#chat-input textarea#chat-input-textarea::-webkit-input-placeholder {
   color: #C8C8C8;
+}
+
+.content-label {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+#username, #screen_name {
+  border: 1px solid #E6E6E6;
+  border-radius: 3px;
+  resize: none;
+  padding: 0 25px;
+  padding-top: 10px;
+  font-size: 12px;
+  margin: 0;
+  width: 300px;
+  height: 23px;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+  color: #646464;
+}
+
+#username:focus, #screen_name:focus {
+  outline: 0;
+}
+
+#username::-webkit-input-placeholder, #screen_name::-webkit-input-placeholder {
+  color: #C8C8C8;
+}
+
+#icon {
+  font-size: 12px;
+  color: #646464;
+}
+
+.content {
+  margin-bottom: 20px;
+}
+
+#submit {
+  width: 150px;
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 3px;
+  height: 15px;
+  padding: 10px 0;
+  background: #4885ED;
+}
+
+#submit:hover {
+  background: #3471D9;
+  -webkit-transition: 0.5s ease;
 }

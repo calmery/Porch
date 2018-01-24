@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>Login - Porch</title>
+
+    <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+    .clearfix {
+      min-height: 1px
+    }
+
+    .clearfix:after {
+      display: block;
+      clear: both;
+      height: 0;
+      visibility: hidden;
+      content: '.'
+    }
+
+    @font-face {
+      src: url( 'font/CONDENSEicon.otf' );
+      font-family: Condense;
+    }
+
+    a {
+      text-decoration: none;
+      color: #646464;
+    }
+
+    body {
+      opacity: 0;
+      background: #FAFAFA;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-weight: bold;
+      font-size: 15px;
+      color: #646464;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      0% {}
+      100% {
+        opacity: 1
+      }
+    }
+
+    section#main header#header {
+      width: calc( 100% - 50px );
+      height: 29px;
+      padding: 25px;
+      background: #FFF;
+      border-bottom: 1px solid #E6E6E6;
+      vertical-align: bottom
+    }
+
+    section#main header#header div#title {
+      font-size: 25px;
+      height: 25px;
+      line-height: 25px;
+      float: left;
+    }
+
+    section#main header#header div.menu {
+      float: left;
+      height: 30px;
+      font-size: 15px;
+      margin-left: 25px;
+      line-height: 30px;
+    }
+
+    section#main header#header div#github {
+      float: right;
+      width: 40px;
+      height: 40px;
+    }
+
+    section#main header#header div#github img {
+      width: 100%;
+      height: 100%;
+      margin-top: -5px;
+    }
+
+    section#main div#screen {
+      width: 100%;
+      height: 403px;
+      background: #F0F2F3;
+      border: 1px solid #E6E6E6;
+    }
+
+    section#main div#screen div#keywords {
+      text-align: center;
+      font-size: 25px;
+      padding-top: 50px;
+    }
+
+    section#main div#screen div#button {
+      width: 223px;
+      height: 20px;
+      line-height: 20px;
+      border-radius: 3px;
+      border: 1px solid #3471D9;
+      padding: 14px 23px;
+      background: #4885ED;
+      margin: 20px auto 0 auto;
+      color: #FFF;
+      font-size: 20px;
+      -webkit-transition: 0.3s ease;
+    }
+
+    section#main div#screen div#button:hover {
+      background: #3471D9;
+    }
+
+    section#main div#screen div#image {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    section#main div#screen div#image img {
+      width: 725px;
+    }
+
+    section#main div#contents {
+      margin: 25px 0;
+    }
+
+    section#main div#contents div.content {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    section#main div#contents div.content:first-child {
+      margin-top: 0;
+    }
+
+    section#main div#contents div.content.label {
+      font-size: 20px;
+    }
+
+    section#main div#contents div.content a {
+      font-size: 15px;
+      margin-left: 25px;
+    }
+
+    section#main div#contents div.content a:first-child {
+      margin-left: 0;
+    }
+
+    section#main div#footer {
+      text-align: center;
+      margin-top: 50px;
+      margin-bottom: 25px;
+    }
+    #input {
+      margin-top: 25px;
+      text-align: center;
+    }
+    textarea#email {
+      text-align: center;
+      width: 185px;
+      padding: 0 25px;
+      padding-top: 10px;
+      font-size: 12px;
+      font-weight: bold;
+      color: #646464;
+      font-family: 'Helvetica Neue', sans-serif;
+      resize: none;
+      margin: 0 auto;
+      height: 23px;
+      border: 1px solid #E6E6E6;
+      border-radius: 3px;
+      line-height: 15px;
+      -webkit-transition: 0.3s ease;
+    }
+    textarea#email:focus {
+      outline: 0;
+      width: 300px;
+    }
+    textarea#email::-webkit-input-placeholder {
+      color: #C8C8C8;
+      text-align: center;
+    }
+    </style>
+  </head>
+
+  <body>
+    <section id="main">
+
+      <header id="header" class="clearfix">
+        <a href="/"><div id="title">Small Porch</div></a>
+        <a href="/docs"><div class="menu">Documentation</div></a>
+        <a href="https://github.com/calmery/Porch">
+          <div id="github">
+            <img src="data:image/png;base64,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">
+          </div>
+        </a>
+      </header>
+
+      <div id="screen" style="height: auto; padding-bottom: 50px;">
+        <div id="keywords">Send magic sign-in link to your email address</div>
+        <div id="input">
+          <textarea id="email" placeholder="Please enter your email address"></textarea>
+        </div>
+        <div id="button" style="text-align: center; width: 100px; font-size: 15px; padding: 10px 0;" onclick="send()">Send</div>
+      </div>
+    </section>
+
+    <script>
+      const send = _ => {
+        const email = document.getElementById( 'email' ).value
+        const matched = email.match( /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/g )
+        if( matched !== null && matched.length === 1 && matched[0] === email ){
+          const form = document.createElement( 'form' )
+          form.style.display = 'none'
+          form.action = '/request'
+          form.method = 'post'
+          const user = document.createElement( 'input' )
+          user.name = 'user'
+          user.value = email
+          form.appendChild( user )
+          document.body.appendChild( form )
+          form.submit()
+          alert( 'Check your mailbox.' )
+        } else {
+          alert( 'Doesn’t look like a valid email.' )
+        }
+      }
+    </script>
+  </body>
+
+</html>
