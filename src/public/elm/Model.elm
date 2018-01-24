@@ -1,6 +1,7 @@
 module Model exposing (Model, initialModel, Status, User, Temp)
 
 
+initialModel : Model
 initialModel =
     Model [] [] (User "" "" "" "" "") "" (Temp "" "" "" "") "/"
 
