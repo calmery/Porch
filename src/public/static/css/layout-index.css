@@ -113,35 +113,9 @@ section#main div#screen div#image img {
   width: 725px;
 }
 
-section#main div#contents {
-  margin: 25px 0;
-}
-
-section#main div#contents div.content {
-  text-align: center;
-  margin-top: 25px;
-}
-
-section#main div#contents div.content:first-child {
-  margin-top: 0;
-}
-
-section#main div#contents div.content.label {
-  font-size: 20px;
-}
-
-section#main div#contents div.content a {
-  font-size: 15px;
-  margin-left: 25px;
-}
-
-section#main div#contents div.content a:first-child {
-  margin-left: 0;
-}
-
 section#main div#footer {
   text-align: center;
-  margin-top: 50px;
+  margin-top: 25px;
   margin-bottom: 25px;
 }
 
