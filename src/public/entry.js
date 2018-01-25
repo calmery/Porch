@@ -2,6 +2,7 @@ import Elm from './elm/Main.elm'
 
 import './static/conversation.html'
 import 'normalize.css'
+import './static/css/common.css'
 import './static/css/layout.css'
 
 import io from './static/js/socket.io.js'

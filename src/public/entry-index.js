@@ -2,6 +2,7 @@ import Elm from './static/Main.elm'
 
 import './static/index.html'
 import 'normalize.css'
+import './static/css/common.css'
 import './static/css/layout-index.css'
 
 const app = Elm.Main.fullscreen()

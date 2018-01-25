@@ -1,0 +1,37 @@
+.clearfix {
+  min-height: 1px
+}
+
+.clearfix:after {
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+  content: '.'
+}
+
+@font-face {
+  src: url( 'font/CONDENSEicon.otf' );
+  font-family: Condense;
+}
+
+body {
+  opacity: 0;
+  background: #FAFAFA;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+  color: #646464;
+  animation: fadeIn 1s ease forwards;
+}
+
+a {
+  text-decoration: none;
+  color: #646464;
+}
+
+@keyframes fadeIn {
+  100% {
+    opacity: 1
+  }
+}
