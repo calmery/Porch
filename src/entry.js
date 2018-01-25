@@ -72,7 +72,7 @@ const smtpServer = email.server.connect( {
 } )
 
 passwordless.addDelivery( ( tokenToSend, uidToSend, recipient, callback ) => {
-  const host = 'localhost:3000'
+  const host = process.env.PORCH_HOST
   smtpServer.send( {
     text: `Hello !\nYou asked us to send you a magic link for quickly signing in to your porch conversation. Sign in to Porch.\nhttp://${host}/?token=${tokenToSend}&uid=${encodeURIComponent( uidToSend )}`,
     from: 'Porch <' + EMAIL + '>',
@@ -100,7 +100,7 @@ const createHash = src => {
   return md5.digest( 'hex' )
 }
 
-const io = socketIo( app.listen( 3000 ) )
+const io = socketIo( app.listen( process.env.PORT || 3000 ) )
 
 io.use( expressSocketIoSession( session ) )
 io.on( 'connection', socket => {
